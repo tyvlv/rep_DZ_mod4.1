@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "dz-mod4-1"
+version = "0.1.0"
+description = ""
+authors = ["tychkov.vv <tyvl@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "dz_mod4"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytest = "^7.2.1"
+pytest-cov = "^4.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
