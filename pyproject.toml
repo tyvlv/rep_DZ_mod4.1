@@ -8,9 +8,11 @@ packages = [{include = "dz_mod4"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
 pytest = "^7.2.1"
 pytest-cov = "^4.0.0"
-
 
 [build-system]
 requires = ["poetry-core"]
