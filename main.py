@@ -1,13 +1,27 @@
 from classes import Item
 
-item1 = Item("Смартфон", 10000, 20)
-item2 = Item("Ноутбук", 20000, 5)
 
-print(item1.calculate_total_price())
-print(item2.calculate_total_price())
+def main():
+    item = Item('Телефон', 10000, 5)
+    item.name = 'Смартфон'
+    print(item._Item__name)
+    print(item.name)
+    print(item.__dict__)
 
-Item.pay_rate = 0.8
-item1.apply_discount()
-print(item1.price)
-print(item2.price)
-print(Item.all)
+    item.name = 'СуперСмарт'
+    print(item.name)
+
+    Item.instantiate_from_csv()  # создание объектов из данных файла
+    print(len(Item.all))  # в файле 5 записей с данными по товарам
+
+    item1 = Item.all[2]
+    print(item1.price)
+    print(type(item1.price))
+
+    print(Item.is_integer(5))
+    print(Item.is_integer(5.0))
+    print(Item.is_integer(5.5))
+
+
+if __name__ == "__main__":
+    main()
