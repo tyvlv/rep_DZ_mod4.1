@@ -35,9 +35,27 @@ def test_apply_discount(item2):
     assert item2.price == 16_000
 
 
-def test_repr(item1):
+def test_repr_item(item1):
     assert item1.__repr__() == 'Item("Смартфон", 10000, 20)'
 
 
 def test_str(item1):
     assert item1.__str__() == "Смартфон"
+
+
+def test_add(item1, phone1):
+    assert item1 + phone1 == 25
+    with pytest.raises(ValueError):
+        phone1 + 2
+
+
+def test_repr_phone(phone1):
+    assert phone1.__repr__() == 'Phone("iPhone 14", 120000, 5, 2)'
+
+
+def test_number_of_sim(phone1):
+    """Тест проверки количества sim-карт"""
+    phone1.number_of_sim = 4
+    assert phone1.number_of_sim == 4
+    with pytest.raises(ValueError):
+        phone1.number_of_sim = 0

@@ -18,6 +18,11 @@ class Item:
     def __str__(self):
         return f'{self.__name}'
 
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Второе слагаемое должно быть класса Item или дочернего')
+        return self.amount + other.amount
+
     @classmethod
     def instantiate_from_csv(cls) -> None:
         """Создаёт новые экземпляры из csv-файла"""
@@ -61,3 +66,25 @@ class Item:
     def apply_discount(self) -> None:
         """Применяет установленную скидку на конкретный товар"""
         self.price = self.price * Item.pay_rate
+
+
+class Phone(Item):
+    def __init__(self, name: str, price: float, amount: float, number_of_sim: int):
+        super().__init__(name, price, amount)
+        self.__number_of_sim = number_of_sim
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}("{self.name}", {self.price}, {self.amount}, {self.number_of_sim})'
+
+    @property
+    def number_of_sim(self) -> int:
+        """Возвращает количество sim-карт, поддерживаемых телефоном"""
+        return self.__number_of_sim
+
+    @number_of_sim.setter
+    def number_of_sim(self, number_of_sim: int) -> None:
+        """Контролирует, что количество sim-карт, поддерживаемых телефоном, больше нуля"""
+        if number_of_sim > 0 and type(number_of_sim) is int:
+            self.__number_of_sim = number_of_sim
+        else:
+            raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
