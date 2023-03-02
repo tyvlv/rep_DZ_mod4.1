@@ -71,7 +71,7 @@ class Item:
 class Phone(Item):
     def __init__(self, name: str, price: float, amount: float, number_of_sim: int):
         super().__init__(name, price, amount)
-        self.__number_of_sim = number_of_sim
+        self.number_of_sim = number_of_sim
 
     def __repr__(self):
         return f'{self.__class__.__name__}("{self.name}", {self.price}, {self.amount}, {self.number_of_sim})'
@@ -79,12 +79,12 @@ class Phone(Item):
     @property
     def number_of_sim(self) -> int:
         """Возвращает количество sim-карт, поддерживаемых телефоном"""
-        return self.__number_of_sim
+        return self._number_of_sim
 
     @number_of_sim.setter
     def number_of_sim(self, number_of_sim: int) -> None:
         """Контролирует, что количество sim-карт, поддерживаемых телефоном, больше нуля"""
         if number_of_sim > 0 and type(number_of_sim) is int:
-            self.__number_of_sim = number_of_sim
+            self._number_of_sim = number_of_sim
         else:
             raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')

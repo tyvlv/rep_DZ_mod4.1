@@ -6,7 +6,7 @@ def main():
 
     print(item)
 
-    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    phone1 = Phone("iPhone 14", 120_000, 5, 1)
     print(phone1)
     print(repr(phone1))
     phone1.number_of_sim = 3
