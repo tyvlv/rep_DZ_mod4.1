@@ -1,4 +1,4 @@
-from classes import Item, Phone
+from classes import Item, Phone, Keyboard
 
 
 def main():
@@ -6,12 +6,20 @@ def main():
 
     print(item)
 
-    phone1 = Phone("iPhone 14", 120_000, 5, 1)
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
     print(phone1)
     print(repr(phone1))
     phone1.number_of_sim = 3
 
     print(repr(phone1))
+
+    kb = Keyboard('Dark Project KD87A', 9600, 5)
+    print(kb)
+    print(kb.language)
+    kb.change_lang()
+    print(kb.language)
+    kb.change_lang()
+    print(kb.language)
 
 
 if __name__ == "__main__":

@@ -69,6 +69,8 @@ class Item:
 
 
 class Phone(Item):
+    """Класс товара - Телефон"""
+
     def __init__(self, name: str, price: float, amount: float, number_of_sim: int):
         super().__init__(name, price, amount)
         self.number_of_sim = number_of_sim
@@ -88,3 +90,28 @@ class Phone(Item):
             self._number_of_sim = number_of_sim
         else:
             raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
+
+
+class MixinLang:
+    """Миксин - раскладка клавиатуры"""
+
+    def __init__(self, *args):
+        self.__language = 'EN'
+        super().__init__(*args)
+
+    @property
+    def language(self) -> str:
+        """Возвращает текущую раскладку клавиатуры"""
+        return self.__language
+
+    def change_lang(self) -> None:
+        """Меняет раскладку клавиатуры"""
+        if self.__language == 'EN':
+            self.__language = 'RU'
+        else:
+            self.__language = 'EN'
+
+
+class Keyboard(MixinLang, Item):
+    """Класс товара - Клавиатура"""
+    pass

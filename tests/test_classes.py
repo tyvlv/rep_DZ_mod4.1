@@ -59,3 +59,11 @@ def test_number_of_sim(phone1):
     assert phone1.number_of_sim == 4
     with pytest.raises(ValueError):
         phone1.number_of_sim = 0
+
+
+def test_change_lang(kb):
+    """Тест переключения раскладки клавиатуры"""
+    kb.change_lang()
+    assert kb.language == 'RU'
+    kb.change_lang()
+    assert kb.language == 'EN'
