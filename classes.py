@@ -3,6 +3,7 @@ import csv
 
 class Item:
     """Класс товара в магазине электроники"""
+    PATH_TO_FILE_CSV = 'items.csv'
     pay_rate = 1
     all = []
 
@@ -26,18 +27,27 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls) -> None:
         """Создаёт новые экземпляры из csv-файла"""
-        with open('items.csv', 'r', encoding="windows-1251") as file:
-            reader = csv.DictReader(file)
-            for column in reader:
-                if cls.is_integer(column['price']):
-                    price = int(float(column['price']))
-                else:
-                    price = float(column['price'])
-                if cls.is_integer(column['quantity']):
-                    amount = int(float(column['quantity']))
-                else:
-                    amount = float(column['quantity'])
-                cls(column['name'], price, amount)
+        try:
+            with open(cls.PATH_TO_FILE_CSV, 'r', encoding="windows-1251") as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    if list(row.keys()) == ['name', 'price', 'quantity']:
+                        if cls.is_integer(row['price']):
+                            price = int(float(row['price']))
+                        else:
+                            price = float(row['price'])
+                        if cls.is_integer(row['quantity']):
+                            amount = int(float(row['quantity']))
+                        else:
+                            amount = float(row['quantity'])
+                        cls(row['name'], price, amount)
+                    else:
+                        raise InstantiateCSVError
+
+        except FileNotFoundError:
+            print("FileNotFoundError: Отсутствует файл item.csv")
+        except InstantiateCSVError:
+            print("InstantiateCSVError: Файл item.csv поврежден")
 
     @staticmethod
     def is_integer(data) -> bool:
@@ -114,4 +124,9 @@ class MixinLang:
 
 class Keyboard(MixinLang, Item):
     """Класс товара - Клавиатура"""
+    pass
+
+
+class InstantiateCSVError(Exception):
+    """Класс - исключение при поврежденном файле item.csv"""
     pass
