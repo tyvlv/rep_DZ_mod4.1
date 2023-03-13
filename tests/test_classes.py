@@ -4,8 +4,24 @@ from classes import Item
 
 def test_instantiate_from_csv():
     """Тест метода создания экземпляров класса из csv-файла"""
+    Item.PATH_TO_FILE_CSV = 'tests/data/test_items.csv'
+    Item.all = []
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
+    assert Item.all[3].name == 'Мышка'
+    assert Item.all[4].amount == 5
+
+
+def test_get_file_not_found_error():
+    """Тест исключения FileNotFoundError в связи с отсутствием файла"""
+    Item.PATH_TO_FILE_CSV = 'tests/data/test.csv'
+    assert Item.instantiate_from_csv() == print("FileNotFoundError: Отсутствует файл item.csv")
+
+
+def test_get_instantiate_csv_error():
+    """Тест исключения InstantiateCSVError, если файл поврежден"""
+    Item.PATH_TO_FILE_CSV = 'tests/data/test_items2.csv'
+    assert Item.instantiate_from_csv() == print("InstantiateCSVError: Файл item.csv поврежден")
 
 
 def test_is_integer():
